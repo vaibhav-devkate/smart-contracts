@@ -1,49 +1,35 @@
-# MyToken (ERC20)
+# ERC20 Token Implementations
 
-A standard implementation of an ERC20 token on the Ethereum blockchain.
+This directory contains two versions of an ERC20 token implementation for learning and comparison.
 
-## Overview
+## Implementations
 
-This contract is based on the [OpenZeppelin ERC20](https://docs.openzeppelin.com/contracts/5.x/api/token/erc20) implementation, which is the industry standard for secure and reliable token contracts.
+### 1. Raw Implementation (`MyTokenRaw.sol`)
+A from-scratch implementation of the ERC20 standard. This is useful for understanding how the core logic of a token actually works, including:
+- Manual balance management.
+- Manual allowance and approval logic.
+- Basic security checks.
 
-It provides the core functionality required for an ERC20 token, including:
+### 2. OpenZeppelin Implementation (`MyTokenOZ.sol`)
+An implementation based on the [OpenZeppelin ERC20](https://docs.openzeppelin.com/contracts/5.x/api/token/erc20) library. This is the industry standard for production use because it is:
+- Extensively audited.
+- Highly optimized.
+- Modular and easy to extend.
 
-- Transferring tokens from one account to another.
-- Getting the current token balance of an account.
-- Authorizing others (like decentralized exchanges) to spend tokens on your behalf.
-- Total supply management.
+## Key Differences
 
-## Contract Details
-
-- **Name:** MyToken
-- **Symbol:** MTK
-- **Decimals:** 18
-- **Initial Supply:** Defined at deployment (multiplied by 10^18).
-
-## Key Functions
-
-### `balanceOf(address account)`
-
-Returns the number of tokens owned by `account`.
-
-### `transfer(address to, uint256 amount)`
-
-Moves `amount` tokens from the caller's account to `to`. Returns a boolean value indicating whether the operation succeeded.
-
-### `approve(address spender, uint256 amount)`
-
-Sets `amount` as the allowance of `spender` over the caller's tokens.
-
-### `transferFrom(address from, address to, uint256 amount)`
-
-Moves `amount` tokens from `from` to `to` using the allowance mechanism. `amount` is then deducted from the caller's allowance.
+| Feature | Raw Implementation | OpenZeppelin Implementation |
+| :--- | :--- | :--- |
+| **Code Length** | ~80 lines | ~15 lines |
+| **Reliability** | Educational only | Production ready |
+| **Logic** | Manual | Inherited |
 
 ## Deployment
 
-To deploy this contract:
+To deploy either contract:
 
 1.  Initialize a project with [Hardhat](https://hardhat.org/) or [Foundry](https://book.getfoundry.sh/).
-2.  Install OpenZeppelin contracts:
+2.  Install OpenZeppelin contracts (for the OZ version):
 
     ```bash
     npm install @openzeppelin/contracts
@@ -52,11 +38,13 @@ To deploy this contract:
 3.  Compile using Solidity `0.8.20` or higher.
 4.  Deploy providing the `initialSupply`.
 
-## Events
+## Key Functions (Both Versions)
 
-- `Transfer(address indexed from, address indexed to, uint256 value)`: Triggered when tokens are transferred.
-- `Approval(address indexed owner, address indexed spender, uint256 value)`: Triggered when an allowance is set.
+- `balanceOf(address account)`: Returns token balance of `account`.
+- `transfer(address to, uint256 amount)`: Transfers tokens to `to`.
+- `approve(address spender, uint256 amount)`: Sets allowance for `spender`.
+- `transferFrom(address from, address to, uint256 amount)`: Transfers tokens using allowance.
 
 ## License
 
-This project is licensed under the MIT License.
+MIT
