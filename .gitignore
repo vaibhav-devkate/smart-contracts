@@ -1,0 +1,11 @@
+# Agent Specific Config
+.agent/
+
+# Build artifacts
+artifacts/
+out/
+cache/
+
+# Dependencies
+node_modules/
+lib/
